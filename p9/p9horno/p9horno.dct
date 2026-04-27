@@ -236,6 +236,7 @@ eeip
 eeip_bit
 eepgd
 eepgd_bit
+enable
 equals_double
 f
 fast
@@ -273,6 +274,9 @@ go_done
 go_done_bit
 go_not_done
 go_not_done_bit
+gocontrollerad
+gotermometherad
+heater
 i2c_dat
 i2c_dat_bit
 ibf_trise_bit
@@ -338,6 +342,7 @@ ipr1
 ipr2
 irvst
 irvst_bit
+lambda_ad
 lata
 lata0
 lata0_bit
@@ -575,6 +580,7 @@ pspif_bit
 pspip
 pspip_bit
 pspmode_trise_bit
+q
 r
 r_bit
 r_not_w
@@ -703,6 +709,7 @@ re2
 re2_bit
 read_write
 read_write_bit
+readcontroller
 res032
 ri
 ri_bit
@@ -804,6 +811,7 @@ swdten
 swdten_bit
 sync
 sync_bit
+t
 t08bit
 t08bit_bit
 t0cki
@@ -875,6 +883,9 @@ tblptru3
 tblptru3_bit
 tblptru4
 tblptru4_bit
+temperaturetovoltage
+tmax
+tmin
 tmr0h
 tmr0ie
 tmr0ie_bit
