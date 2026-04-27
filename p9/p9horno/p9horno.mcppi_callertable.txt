@@ -1,4 +1,21 @@
 main
 	__CC2DW
 interrupt
+	Mul_16X16_U
+	int2double
+		NRM3232
+			RES032
+			SETFUN32
+			FIXSIGN32
+	Sub_32x32_FP
+		Add_32x32_FP
+			NRM4032
+				SETFUN32
+				FIXSIGN32
+				SETFOV32
+				RES032
+			SETFOV32
+	double2int
+		SETIOV3224
 	goControllerAD
+	goTermometherAD

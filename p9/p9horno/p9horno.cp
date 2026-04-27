@@ -7,6 +7,7 @@
 #line 3 "C:/Users/Lookos/Desktop/Trabajos Uni/practicas2026HAE/p9/p9horno/p9horno.c"
 const int ALPHA_TMR = 28036;
 const float LAMBDA_AD = 0.0048875;
+const float ALPHA_TEMP = 1.955;
 
 int enable = 0;
 int heater = 0;
@@ -16,10 +17,6 @@ int tMin = 0;
 
 int Q = 0;
  _Bool  readController = 0;
-
-int temperatureToVoltage(int voltage){
- return voltage * 50;
-}
 
 void goControllerAD(){
  ADCON0 = 0x44;
@@ -41,8 +38,12 @@ void interrupt(){
 
  if(readController ==  1 ){
  tMax = (ADRESH << 8) + ADRESL;
+ tMax *= 50;
+ tMin = tMax - 2 * ALPHA_TEMP;
+
  }else{
  t = (ADRESH << 8) + ADRESL;
+ t *= 50;
  }
 
  PIR1.ADIF = 0;
@@ -57,6 +58,8 @@ void interrupt(){
  goControllerAD();
 
 
+ goTermometherAD();
+
  if(Q == 0){
  heater = 0;
  if(enable == 0){
@@ -66,16 +69,31 @@ void interrupt(){
  }
 
  }else if(Q == 1){
+ if(enable == 1){
  heater = 1;
  if(t<tMax){
-
+ Q = 1;
  }else{
  Q = 2;
  }
+ }else{
+ Q = 0;
+ }
 
  }else{
+ if(enable == 1){
+ heater = 0;
+ if(t > tMin){
+ Q = 2;
+ }else{
+ Q = 1;
+ }
+ }else{
+ Q = 0;
+ }
 
  }
+
 
  INTCON.TMR0IF = 0;
  }
@@ -87,6 +105,7 @@ void main(){
  TRISA.B4 = 1;
  TRISA.B0 = 1;
  TRISA.B1 = 1;
+ TRISA.B2 = 0;
 
 
  ADCON0 = 0x44;

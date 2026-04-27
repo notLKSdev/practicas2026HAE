@@ -2,6 +2,7 @@
 
 const int ALPHA_TMR = 28036;
 const float LAMBDA_AD = 0.0048875;
+const float ALPHA_TEMP = 1.955;
 
 int enable = 0; // Enable
 int heater = 0; // Activar calentador
@@ -11,10 +12,6 @@ int tMin = 0; // Temperatura minima
 
 int Q = 0; // Variable de estado
 bool readController = 0; // Variable auxiliar lectura AD
-
-int temperatureToVoltage(int voltage){
-    return voltage * 50;
-}
 
 void goControllerAD(){
     ADCON0 = 0x44;
@@ -36,8 +33,12 @@ void interrupt(){
 
         if(readController == true){
             tMax = (ADRESH << 8) + ADRESL;
+            tMax *= 50;
+            tMin = tMax - 2 * ALPHA_TEMP;
+
         }else{
             t = (ADRESH << 8) + ADRESL;
+            t *= 50;
         }
 
         PIR1.ADIF = 0;
@@ -48,9 +49,11 @@ void interrupt(){
         // Comprobar encendido
         enable = PORTA.B4;
 
-        // Leer termperatura
+        // Leer mando
         goControllerAD();
 
+        // Leer temperatura
+        goTermometherAD();
 
         if(Q == 0){ // Horno apagado
             heater = 0;
@@ -60,17 +63,32 @@ void interrupt(){
                 Q = 1;
             }
 
-        }else if(Q == 1){ // Temperatura menor o tMax
-            heater = 1;
-            if(t<tMax){
-
+        }else if(Q == 1){ // Temperatura menor a tMax
+            if(enable == 1){
+                heater = 1;
+                if(t<tMax){
+                    Q = 1;
+                }else{
+                    Q = 2;
+                }
             }else{
-                Q = 2;
+                Q = 0;
             }
 
         }else{ // Temperatura mayor a tMin
+            if(enable == 1){
+                heater = 0;
+                if(t > tMin){
+                    Q = 2;
+                }else{
+                    Q = 1;
+                }
+            }else{
+                Q = 0;
+            }
 
         }
+        
 
         INTCON.TMR0IF = 0;
     }
@@ -82,6 +100,7 @@ void main(){
     TRISA.B4 = 1; // Boton encendido
     TRISA.B0 = 1; // Voltaje medio termometro
     TRISA.B1 = 1; // Voltaje mando
+    TRISA.B2 = 0; // Calentador
 
     // Configurar AD para comenzar midiendo el mando (El horno comienza apagado)
     ADCON0 = 0x44;

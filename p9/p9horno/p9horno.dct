@@ -53,6 +53,7 @@ adon_bit
 adres
 adresh
 adresl
+alpha_temp
 alpha_tmr
 an0
 an0_bit
@@ -883,7 +884,6 @@ tblptru3
 tblptru3_bit
 tblptru4
 tblptru4_bit
-temperaturetovoltage
 tmax
 tmin
 tmr0h
