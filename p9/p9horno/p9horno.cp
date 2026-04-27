@@ -38,12 +38,12 @@ void interrupt(){
 
  if(readController ==  1 ){
  tMax = (ADRESH << 8) + ADRESL;
- tMax *= 50;
+ tMax = tMax * LAMBDA_AD * 50;
  tMin = tMax - 2 * ALPHA_TEMP;
 
  }else{
  t = (ADRESH << 8) + ADRESL;
- t *= 50;
+ t = t * LAMBDA_AD * 50;
  }
 
  PIR1.ADIF = 0;
@@ -54,11 +54,11 @@ void interrupt(){
 
  enable = PORTA.B4;
 
-
- goControllerAD();
-
-
+ if(readController){
  goTermometherAD();
+ }else{
+ goControllerAD();
+ }
 
  if(Q == 0){
  heater = 0;
@@ -94,6 +94,10 @@ void interrupt(){
 
  }
 
+ PORTA.B2 = heater;
+
+ TMR0L = ALPHA_TMR;
+ TMR0H = (ALPHA_TMR >> 8);
 
  INTCON.TMR0IF = 0;
  }

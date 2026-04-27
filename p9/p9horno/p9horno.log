@@ -1,11 +1,11 @@
 0	1	mikroCPIC1618.exe -MSF -DBG -pP18F452 -DL -O11111114 -fo6 -N"C:\Users\Lookos\Desktop\Trabajos Uni\practicas2026HAE\p9\p9horno\p9horno.mcppi" -SP"C:\Users\Lookos\Documents\Mikroelektronika\mikroC PRO for PIC\Defs\" -SP"C:\Users\Lookos\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -SP"C:\Users\Lookos\Desktop\Trabajos Uni\practicas2026HAE\p9\p9horno\" -IP"C:\Users\Lookos\Documents\Mikroelektronika\mikroC PRO for PIC\uses\P18\" -IP"C:\Users\Lookos\Desktop\Trabajos Uni\practicas2026HAE\p9\p9horno\" "p9horno.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl"	 
 hint: 0	1139	Available RAM: 1515 [bytes], Available ROM: 32768 [bytes]	 
 diagnostics: 0	122	Compilation Started	stdbool.h
-diagnostics: 130	123	Compiled Successfully	p9horno.c
+diagnostics: 134	123	Compiled Successfully	p9horno.c
 diagnostics: 0	127	All files Compiled in 125 ms	 
 hint: 0	1144	Used RAM (bytes): 13 (1%)  Free RAM (bytes): 1502 (99%)	Used RAM (bytes): 13 (1%)  Free RAM (bytes): 1502 (99%)
-hint: 0	1144	Used ROM (bytes): 2588 (8%)  Free ROM (bytes): 30180 (92%)	Used ROM (bytes): 2588 (8%)  Free ROM (bytes): 30180 (92%)
+hint: 0	1144	Used ROM (bytes): 2898 (9%)  Free ROM (bytes): 29870 (91%)	Used ROM (bytes): 2898 (9%)  Free ROM (bytes): 29870 (91%)
 diagnostics: 0	125	Project Linked Successfully	p9horno.mcppi
-diagnostics: 0	128	Linked in 15 ms	 
-diagnostics: 0	129	Project 'p9horno.mcppi' completed: 156 ms	 
-diagnostics: 0	103	Finished successfully: 27 abr. 2026, 22:18:13	p9horno.mcppi
+diagnostics: 0	128	Linked in 16 ms	 
+diagnostics: 0	129	Project 'p9horno.mcppi' completed: 157 ms	 
+diagnostics: 0	103	Finished successfully: 27 abr. 2026, 22:23:20	p9horno.mcppi
