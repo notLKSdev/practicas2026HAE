@@ -9,6 +9,7 @@ Estas prácticas están centradas en la **programación en C** para el microcont
 - Código fuente de las prácticas en C.
 - Proyectos configurados en proteus 8 para la simulación de los ejercicios resueltos.
 - Documentación, chuleta con fórmulas y enunciados de los ejercicios en la carpeta `doc`.
+- También he creado una carpeta `extras` en donde subiré algún ejercicio de los boletines o que encuentre por algún sitio.
 
 ## Notas
 - Los enunciados de las prácticas están en la carpeta `doc`, en esta carpeta también he dejado una chuleta con fórmulas útiles para realizar las prácticas.
