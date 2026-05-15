@@ -1,4 +1,5 @@
-/* Este ejercicio corresponde al ejercicio 8 del boletin 3 (el que es de un sensor SRF04)
+/* Este ejercicio corresponde al ejercicio 8 del boletin 3 (el que es de un sensor SRF04),
+ * hay que usar la opción 2 para no tener que utilizar la técnica de polling.
  *
  * ATENCION: NO LO HE PROBADO, solo lo he pensado asi y ni siquiera estoy seguro de que este bien
  */
@@ -15,12 +16,12 @@ sbit LCD_D5 at RD5_bit;
 sbit LCD_D4 at RD4_bit;
 
 // LCD directions
-sbit LCD_RS at TRISD2_bit;
-sbit LCD_EN at TRISD.B3;
-sbit LCD_D7 at TRISD7_bit;
-sbit LCD_D6 at TRISD6_bit;
-sbit LCD_D5 at TRISD5_bit;
-sbit LCD_D4 at TRISD4_bit;
+sbit LCD_RS_Direction at TRISD2_bit;
+sbit LCD_EN_Direction at TRISD.B3;
+sbit LCD_D7_Direction at TRISD7_bit;
+sbit LCD_D6_Direction at TRISD6_bit;
+sbit LCD_D5_Direction at TRISD5_bit;
+sbit LCD_D4_Direction at TRISD4_bit;
 
 volatile unsigned int tiempoEcho = 0;
 
