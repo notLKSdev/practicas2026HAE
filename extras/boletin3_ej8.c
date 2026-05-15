@@ -112,7 +112,10 @@ void interrupt(){
 }
 
 void main(){
+
+    // Configuracion inicial
     Lcd_init();
+    ADCON1 = 0x07;
     
     // Salidas
     TRISA.B3 = 0;
