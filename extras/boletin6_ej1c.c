@@ -1,41 +1,45 @@
-unsigned short q = 0;
-unsigned short t = 0;
+unsigned short q = 0; // Estado
+unsigned short t = 0; // Temporizacion de 4 segundos
 
 void interrupt(){
-
     if(INTCON.TMR0IF == 1){
-        if(q == 0){
-            PORTB.B0 = 0; // i
-            PORTA.B3 = 0; // d
+        switch(q){
+            case 0:
+                PORTB.B0 = 0; // i
+                PORTA.B3 = 0; // d
 
-            if(PORTA.B0 == 1){
-                q = 1;
-            }
-        }else if(q == 1){
-            PORTB.B0 = 1; // i
-            PORTA.B3 = 0; // d
+                if(PORTA.B0 == 1){
+                    q = 1;
+                }
+                break;
+            case 1:
+                PORTB.B0 = 1; // i
+                PORTA.B3 = 0; // d
 
-            if(PORTB.B6 == 1){
-                q = 2;
-                t = 0;
-            }
-        }else if(q == 2){
-            PORTB.B0 = 0; // i
-            PORTA.B3 = 0; // d
+                if(PORTB.B6 == 1){
+                    q = 2;
+                    t = 0;
+                }
+                break;
+            case 2:
+                PORTB.B0 = 0; // i
+                PORTA.B3 = 0; // d
 
-            if(t < 40){
-                t++;
-            }else{
-                t = 0;
-                q = 3;
-            }
-        }else{
-            PORTB.B0 = 0; // i
-            PORTA.B3 = 1; // d
+                if(t < 40){
+                    t++;
+                }else{
+                    t = 0;
+                    q = 3;
+                }
+                break;
+            case 3:
+                PORTB.B0 = 0; // i
+                PORTA.B3 = 1; // d
 
-            if(PORTB.B4 == 1){
-                q = 0;
-            }
+                if(PORTB.B4 == 1){
+                    q = 0;
+                }
+                break;
         }
 
         INTCON.TMR0IF = 0;
