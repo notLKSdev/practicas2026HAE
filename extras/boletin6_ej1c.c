@@ -4,24 +4,28 @@ unsigned short t = 0; // Temporizacion de 4 segundos
 void interrupt(){
     if(INTCON.TMR0IF == 1){
         switch(q){
-            case 0:
+            case 0: // Vagoneta quieta en A
                 PORTB.B0 = 0; // i
                 PORTA.B3 = 0; // d
 
+                // Si esta en A y se pulsa el boton M
                 if(PORTA.B0 == 1){
                     q = 1;
                 }
                 break;
-            case 1:
+            
+            case 1: // Vagoneta se mueve a la derecha
                 PORTB.B0 = 1; // i
                 PORTA.B3 = 0; // d
 
+                // Si llega a B
                 if(PORTB.B6 == 1){
                     q = 2;
                     t = 0;
                 }
                 break;
-            case 2:
+
+            case 2: // Espera 4 segundos en B
                 PORTB.B0 = 0; // i
                 PORTA.B3 = 0; // d
 
@@ -32,10 +36,12 @@ void interrupt(){
                     q = 3;
                 }
                 break;
-            case 3:
+
+            case 3: // Vagoneta se mueve a la izquierda
                 PORTB.B0 = 0; // i
                 PORTA.B3 = 1; // d
 
+                // Si llega a A
                 if(PORTB.B4 == 1){
                     q = 0;
                 }
