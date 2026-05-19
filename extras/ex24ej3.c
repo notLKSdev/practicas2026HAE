@@ -31,11 +31,32 @@ const float LAMBDA = 0.00488758;
 
 char txt[15];
 
+unsigned short lockLed = 0;
+
 void interrupt(){
 
-    
+    // Si pulsamos el boton encendemos el led y activamos temporizacion de 3 segundos
+    if(INTCON.INT0IF == 1){
+        
+        // Mientras la temporizacion el boton no hace nada
+        if(lockLed == 0){
+            PORTE.B1 = 1;
+            T0CON.TMR0ON = 1;
+            TMR0H = (18661 >> 8);
+            TMR0L = 18661;
+        }
 
+        INTCON.INT0IF = 0;
+    }
 
+    // Una vez pasen los 3 segundos apagamos el led, apagamos el timer y desbloqueamos el boton
+    if(INTCON.TMR0IF == 1){
+        PORTE.B1 = 0;
+
+        T0CON.TMR0ON = 0;
+        lockLed = 0;
+        INTCON.TMR0IF = 0;
+    }
 
 
 }
