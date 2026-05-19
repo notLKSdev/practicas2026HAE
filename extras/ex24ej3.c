@@ -27,15 +27,13 @@ sbit LCD_D6_Direction at TRISD6_bit;
 sbit LCD_D5_Direction at TRISD5_bit;
 sbit LCD_D4_Direction at TRISD4_bit;
 
-const float LAMBDA = 0.00488758;
-
 char txt[15];
 
 unsigned short lockLed = 0;
 
 void interrupt(){
 
-    // Si pulsamos el boton encendemos el led y activamos temporizacion de 3 segundos
+    // Si pulsamos el boton 0 encendemos el led y activamos temporizacion de 3 segundos
     if(INTCON.INT0IF == 1){
         
         // Mientras la temporizacion el boton no hace nada
@@ -49,7 +47,7 @@ void interrupt(){
         INTCON.INT0IF = 0;
     }
 
-    // Una vez pasen los 3 segundos apagamos el led, apagamos el timer y desbloqueamos el boton
+    // Una vez pasen los 3 segundos apagamos el led, apagamos el timer y desbloqueamos el boton 0
     if(INTCON.TMR0IF == 1){
         PORTE.B1 = 0;
 
@@ -57,6 +55,8 @@ void interrupt(){
         lockLed = 0;
         INTCON.TMR0IF = 0;
     }
+
+    
 
 
 }
