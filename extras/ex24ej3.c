@@ -33,6 +33,8 @@ char txt[15];
 
 void interrupt(){
 
+    
+
 
 
 
@@ -67,6 +69,16 @@ void main(){
     // Habilitar interrupciones del timer0
     INTCON.TMR0IF = 0;
     INTCON.TMR0IE = 1;
+
+    // Configuracion INT0 (boton LED)
+    INTCON2.INTEDG0 = 1;
+    INTCON.INT0IF = 0;
+    INTCON.INT0IE = 1;
+
+    // Configuracion INT1 (sensor humedad)
+    INTCON2.INTEDG1 = 1;
+    INTCON3.INT1IF = 0;
+    INTCON3.INT1IE = 1;
 
     // Habilitar interrupciones globales
     INTCON.GIE = 1;
