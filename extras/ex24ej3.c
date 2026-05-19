@@ -36,7 +36,7 @@ void interrupt(){
         
         // Solo funciona si la temporizacion no esta activa
         if(INTCON.INT0IE == 1){
-            INTCON.INT0IE = 0;
+            INTCON.INT0IE = 0; // Desactivamos el boton una vez pulsado hasta que ocurra la temporizacion
             PORTE.B1 = 1;
             T0CON.TMR0ON = 1;
             TMR0H = (18661 >> 8);
