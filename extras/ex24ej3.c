@@ -29,15 +29,14 @@ sbit LCD_D4_Direction at TRISD4_bit;
 
 char txt[15];
 
-unsigned short lockLed = 0;
-
 void interrupt(){
 
     // Si pulsamos el boton 0 encendemos el led y activamos temporizacion de 3 segundos
     if(INTCON.INT0IF == 1){
         
-        // Mientras la temporizacion el boton no hace nada
-        if(lockLed == 0){
+        // Solo funciona si la temporizacion no esta activa
+        if(INTCON.INT0IE == 1){
+            INTCON.INT0IE = 0;
             PORTE.B1 = 1;
             T0CON.TMR0ON = 1;
             TMR0H = (18661 >> 8);
@@ -52,11 +51,17 @@ void interrupt(){
         PORTE.B1 = 0;
 
         T0CON.TMR0ON = 0;
-        lockLed = 0;
+        INTCON.INT0IE = 1; // Volvemos a activar el boton
         INTCON.TMR0IF = 0;
     }
 
-    
+    // Si pulsamos el boton 1 activamos el convertidor AD
+    if(INTCON3.INT1IF == 1){
+
+
+
+        INTCON3.INT1IF = 0;
+    }
 
 
 }
