@@ -8,7 +8,7 @@
  * 
  * Formula para calcular la humedad a partir del voltaje: v0 = 1 + HR/25
  * Frecuencia oscilacion del micro: Fosc = 16 MHz
- * Frecuencia del convertidor AD: FAD = 625 * 10^3 H
+ * Frecuencia del convertidor AD: FAD = 625 * 10^3 Hz
  *
  * NOTA: NO LO HE PROBADO
  */
@@ -103,7 +103,7 @@ void interrupt(){
 }
 
 void main(){
-    Lcd_init();
+    Lcd_Init();
 
     // Configurar entradas
     TRISB.B0 = 1;

@@ -5,9 +5,6 @@
  * ATENCION: NO LO HE PROBADO, solo lo he pensado asi y ni siquiera estoy seguro de que este bien
  */
 
-
-#include <stdbool.h>
-
 // LCD pinout settings
 sbit LCD_RS at RD2_bit;
 sbit LCD_EN at PORTD.B3;
@@ -115,7 +112,7 @@ void interrupt(){
 void main(){
 
     // Configuracion inicial
-    Lcd_init();
+    Lcd_Init();
     ADCON1 = 0x07;
     
     // Salidas

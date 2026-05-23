@@ -12,7 +12,7 @@
  * 
  * v0 = 0.01 * P + 0.5
  * Fosc = 8MHz
- * FAD = 625 * 10^3 H
+ * FAD = 625 * 10^3 Hz
  * 
  * ATENCION: Codigo sin probar
  */
@@ -24,7 +24,7 @@ char txt[16];
 void interrupt(){
 
     // Pulsamos el boton
-    if(INTCON3.INT1IF = 1){
+    if(INTCON3.INT1IF == 1){
 
         // Encendemos el led
         PORTE.B0 = 1;
@@ -42,7 +42,7 @@ void interrupt(){
     }
 
     // Terminan los 4 segundos
-    if(INTCON.TMR0IF = 1){
+    if(INTCON.TMR0IF == 1){
 
         // Desactivar timer0
         T0CON.TMR0ON = 0;
@@ -58,7 +58,7 @@ void interrupt(){
     }
 
     // Se realiza medicion
-    if(PIR1.ADIF = 1){
+    if(PIR1.ADIF == 1){
 
         // Leer medicion
         v1 = (ADRESH << 8) + ADRESL;
