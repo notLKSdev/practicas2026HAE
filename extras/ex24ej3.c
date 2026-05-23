@@ -142,6 +142,9 @@ void main(){
     INTCON3.INT1IF = 0;
     INTCON3.INT1IE = 1;
 
+    // Habilitar interrupciones perifericas
+    INTCON.PEIE = 1;
+
     // Habilitar interrupciones globales
     INTCON.GIE = 1;
 
