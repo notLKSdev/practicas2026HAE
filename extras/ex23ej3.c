@@ -13,9 +13,13 @@
  * v0 = 0.01 * P + 0.5
  * Fosc = 8MHz
  * FAD = 625 * 10^3 H
+ * 
+ * ATENCION: Codigo sin probar
  */
 
-unsigned int v0 = 0;
+unsigned int v1 = 0;
+float presion = 0.0;
+char txt[16];
 
 void interrupt(){
 
@@ -56,16 +60,31 @@ void interrupt(){
     // Se realiza medicion
     if(PIR1.ADIF = 1){
 
+        // Leer medicion
+        v1 = (ADRESH << 8) + ADRESL;
 
+        // Convertir a presion
+        presion = ((v1 * 0.00488758) - 0.5) / 0.01;
 
+        // Convertir a texto
+        FloatToStr(presion,txt);
 
+        // Mostrar en el LCD
+        Lcd_Cmd(_Lcd_Clear);
+        Lcd_out(1,1,txt);
 
+        // Rehabilitar el boton
+        INTCON3.INT1IE = 1;
+
+        // Borrar flag de interrupcion
+        PIR1.ADIF = 0;
     }
 
 
 }
 
 void main(){
+    Lcd_Init();
 
     // Configurar entradas
     TRISB.B1 = 1;
