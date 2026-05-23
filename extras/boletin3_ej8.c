@@ -1,4 +1,5 @@
-/* Este ejercicio corresponde al ejercicio 8 del boletin 3 (el que es de un sensor SRF04),
+/**
+ * Este ejercicio corresponde al ejercicio 8 del boletin 3 (el que es de un sensor SRF04),
  * hay que usar la opción 2 para no tener que utilizar la técnica de polling.
  *
  * ATENCION: NO LO HE PROBADO, solo lo he pensado asi y ni siquiera estoy seguro de que este bien

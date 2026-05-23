@@ -1,4 +1,4 @@
-/*
+/**
  * Cuando se pulsa el boton RB0 se enciende el led conectado a RE1 durante 3 segundos.
  * Pulsar RB0 mientras el led esta encendido no debe hacer efecto.
  * 
