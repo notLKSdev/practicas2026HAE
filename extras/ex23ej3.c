@@ -15,8 +15,52 @@
  * FAD = 625 * 10^3 H
  */
 
+unsigned int v0 = 0;
+
 void interrupt(){
 
+    // Pulsamos el boton
+    if(INTCON3.INT1IF = 1){
+
+        // Encendemos el led
+        PORTE.B0 = 1;
+
+        // Desactivar boton
+        INTCON3.INT1IE = 0;
+
+        // Activamos timer0 para contabilizar 4 segundos
+        T0CON.TMR0ON = 1;
+        TMR0H = (3036 >> 8);
+        TMR0L = 3036;
+
+        // Borrar flag de interrupcion
+        INTCON3.INT1IF = 0;
+    }
+
+    // Terminan los 4 segundos
+    if(INTCON.TMR0IF = 1){
+
+        // Desactivar timer0
+        T0CON.TMR0ON = 0;
+
+        // Apagar el led
+        PORTE.B0 = 0;
+
+        // Iniciar medicion del sensor
+        ADCON0.GO = 1;
+
+        // Borrar flag de interrupcion
+        INTCON.TMR0IF = 0;
+    }
+
+    // Se realiza medicion
+    if(PIR1.ADIF = 1){
+
+
+
+
+
+    }
 
 
 }
@@ -45,6 +89,9 @@ void main(){
     INTCON2.INTEDG1 = 1;
     INTCON3.INT1IF = 0;
     INTCON3.INT1IE = 1;
+
+    // Habilitar interrupciones perifericas
+    INTCON.PEIE = 1;
 
     // Habilitar interrupciones globales
     INTCON.GIE = 1;
