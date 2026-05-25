@@ -21,7 +21,7 @@ sbit LCD_D6_Direction at TRISD6_bit;
 sbit LCD_D5_Direction at TRISD5_bit;
 sbit LCD_D4_Direction at TRISD4_bit;
 
-volatile unsigned int tiempoEcho = 0;
+unsigned float tiempoEcho = 0;
 
 float distancia = 0;
 
@@ -87,8 +87,8 @@ void interrupt(){
 
             unsigned int alfaEcho = ((unsigned int) high << 8) | low;
 
-            // Convertir medicion del timer a segundos
-            tiempoEcho = (unsigned long)(65536UL - alfaEcho) * 128UL;
+            // Convertir medicion del timer a segundos -> t = (65535 - alfa) * (prescaler/(Fosc/4))
+            tiempoEcho = (65536 - alfaEcho) * 1e-6; // El 1e-6 es el periodo en segundos
 
             // Calcular distancia mediante la formula
             distancia = (1000000 * tiempoEcho)/(0,000058);
