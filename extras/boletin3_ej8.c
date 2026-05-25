@@ -35,14 +35,10 @@ void interrupt(){
         // Trigger ON
         PORTA.B3 = 1;
 
-        // Contar 12 microsegundos en el timer
-        T0CON = 0x48;
+        // Activar timer0
+        T0CON = 0xC8;
         TMR0H = (232 >> 8);
         TMR0L = 232;
-
-        // Activar timer0
-        INTCON.TMR0IF = 0;
-        T0CON.TMR0ON = 1;
 
         INTCON.INT0IF = 0;
     }
@@ -72,21 +68,22 @@ void interrupt(){
 
         // Flanco de subida arrancar el timer
         if(INTCON2.INTEDG2 == 1){
+            T0CON.TMR0ON = 1;
             TMR0H = 0;
             TMR0L = 0;
-            T0CON.TMR0ON = 1;
-
 
             // Cambiar a flanco de bajada
             INTCON2.INTEDG2 == 0;
         
         // Flanco de bajada medir el timer
         }else{
-            T0CON.TMR0ON = 0;
 
-            // Leer el timer
+            // Leer el timer0
             unsigned char low = TMR0L;
             unsigned char high = TMR0H;
+
+            // Apagar el timer0
+            T0CON.TMR0ON = 0;
 
             unsigned int alfaEcho = ((unsigned int) high << 8) | low;
 
