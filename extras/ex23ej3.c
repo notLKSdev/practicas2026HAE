@@ -74,6 +74,7 @@ void interrupt(){
         Lcd_out(1,1,txt);
 
         // Rehabilitar el boton
+        INTCON3.INT1IF = 0;
         INTCON3.INT1IE = 1;
 
         // Borrar flag de interrupcion
