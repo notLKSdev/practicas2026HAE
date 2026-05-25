@@ -58,7 +58,7 @@ void interrupt(){
         // Habilitar INT2 como flanco de subida
         INTCON.INTEDG2 = 1;
         INTCON3.INT2IF = 0;
-        INTCON3.INT2IE = 0;
+        INTCON3.INT2IE = 1;
 
         INTCON.TMR0IF = 0;
     }
