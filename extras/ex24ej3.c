@@ -37,19 +37,15 @@ void interrupt(){
 
     // Si pulsamos el boton 0
     if(INTCON.INT0IF == 1){
+            
+        // Deshabilitar interrupcion boton
+        INTCON.INT0IE = 0;
         
-        // Solo funciona si la temporizacion no esta activa
-        if(INTCON.INT0IE == 1){
-            
-            // Deshabilitar boton
-            INTCON.INT0IE = 0;
-            
-            // Encender LED y activar timer de 3 segundos
-            PORTE.B1 = 1;
-            T0CON.TMR0ON = 1;
-            TMR0H = (18661 >> 8);
-            TMR0L = 18661;
-        }
+        // Encender LED y activar timer de 3 segundos
+        PORTE.B1 = 1;
+        T0CON.TMR0ON = 1;
+        TMR0H = (18661 >> 8);
+        TMR0L = 18661;
 
         INTCON.INT0IF = 0;
     }
@@ -62,22 +58,20 @@ void interrupt(){
 
         // Deshabilitar timer y habilitar boton
         T0CON.TMR0ON = 0;
+        INTCON.INT0IF = 0;
         INTCON.INT0IE = 1;
+        
         INTCON.TMR0IF = 0;
     }
 
     // Si pulsamos el boton 1
     if(INTCON3.INT1IF == 1){
-
-        // Solo funciona tras mostrarlo en el LCD
-        if(INTCON3.INT1IE == 1){
             
-            // Deshabilitar boton
-            INTCON3.INT1IE = 0;
-            
-            // Realizar medicion del AD
-            ADCON0.GO = 1;
-        }
+        // Deshabilitar interrupcion boton 1
+        INTCON3.INT1IE = 0;
+        
+        // Realizar medicion del AD
+        ADCON0.GO = 1;
 
         INTCON3.INT1IF = 0;
     }
@@ -94,8 +88,10 @@ void interrupt(){
         Lcd_Cmd(_Lcd_Clear);
         Lcd_Out(1,1,txt);
         
-        // Activar boton 1 y borrar flag de interrupcion AD
+        // Activar boton 1
+        INTCON3.INT1IF = 0;
         INTCON3.INT1IE = 1;
+        
         PIR1.ADIF = 0;
     }
 
